@@ -14,23 +14,22 @@ export const getTodos = () => {
 			.catch((e) => console.log(e))
 			.finally(() => console.log("api fetched"));
 	}, [url]);
-	console.log("todos: ", data);
 	return data;
 };
 
-export const CreateTodo = (content) => {
-	console.log("createTodo", content);
-	axios
-		.post(url, {
-			content: content,
-		})
-		.then((res) => {
-			console.log(res.data);
-		})
-		.catch((e) => console.log(e))
-		.finally(() => {
-			console.log("todoCreated");
-		});
-
-	// return res.data;
+export const createTodo = async (content) => {
+	// const [data, setData] = useState();
+	if (content.length >= 3) {
+		console.log("createTodo", content);
+		const { data } = await axios
+			.post(url, {
+				content: content,
+			})
+			.catch((e) => console.log(e))
+			.finally(() => {
+				console.log("todoCreated");
+			});
+		console.log("created data: ", data);
+		return data;
+	} else console.log("content min 3 harften oluşmalı");
 };

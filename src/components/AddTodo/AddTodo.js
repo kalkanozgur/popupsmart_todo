@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./AddTodo.module.css";
-import { CreateTodo } from "./../../api";
+import { createTodo } from "./../../api";
 
 function AddTodoForm() {
 	const [formData, setFormData] = useState("");
@@ -9,8 +9,7 @@ function AddTodoForm() {
 	};
 	const OnSubmit = (e) => {
 		e.preventDefault();
-		console.log("onSubmit", formData);
-		if (formData.length >= 3) CreateTodo(formData);
+		createTodo(formData);
 	};
 	return (
 		<div>

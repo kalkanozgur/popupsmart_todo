@@ -12,6 +12,7 @@ function TodoList({ todos }) {
 	if (todos)
 		return (
 			<div className={styles.TodoList}>
+				{/* //TODO */}
 				{/* <FilterTodo /> */}
 				<input
 					type="text"
