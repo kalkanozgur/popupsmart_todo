@@ -14,7 +14,7 @@ export const getTodos = () => {
 			.catch((e) => console.log(e))
 			.finally(() => console.log("api fetched"));
 	}, [url]);
-	console.log(data);
+	console.log("todos: ", data);
 	return data;
 };
 

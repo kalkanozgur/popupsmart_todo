@@ -4,11 +4,8 @@ import { CreateTodo } from "./../../api";
 
 function AddTodoForm() {
 	const [formData, setFormData] = useState("");
-	const AddTodo = (e) => {
+	const OnChange = (e) => {
 		setFormData(e.target.value);
-		if (formData.length > 2) {
-			console.log("e.target.value ", e.target.value);
-		}
 	};
 	const OnSubmit = (e) => {
 		e.preventDefault();
@@ -24,7 +21,7 @@ function AddTodoForm() {
 						placeholder="Add ToDo"
 						className={styles.input}
 						value={formData}
-						onChange={AddTodo}
+						onChange={OnChange}
 					/>
 				</label>
 			</form>

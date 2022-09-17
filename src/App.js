@@ -1,12 +1,12 @@
 import "./App.css";
-import TodoItem from "./components/TodoItem";
 import React, { useState } from "react";
 import { getTodos } from "./api";
 import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
+import Header from "./components/Header";
 
 function App() {
-	const data = getTodos();
+	const todos = getTodos();
 	// const data = [
 	// 	{ content: "content 0", isCompleted: false, id: "0" },
 	// 	{ content: "content 4", isCompleted: false, id: "4" },
@@ -62,9 +62,9 @@ function App() {
 
 	return (
 		<div className="App">
-			<div className="Header">TODO APP</div>
+			<Header />
 			<AddTodo />
-			<TodoList data={data} />
+			<TodoList todos={todos} />
 		</div>
 	);
 }
