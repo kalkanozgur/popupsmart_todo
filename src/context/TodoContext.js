@@ -38,7 +38,9 @@ const TodoProvider = ({ children }) => {
 		}
 	};
 
-	const editTodo = async (content, isComplated) => {};
+	const editTodo = async (id, content, isComplated) => {
+		console.log(id, content, isComplated);
+	};
 
 	const values = { todos, isLoading, refreshTodos, addTodo, editTodo };
 	return <TodoContext.Provider value={values}>{children}</TodoContext.Provider>;

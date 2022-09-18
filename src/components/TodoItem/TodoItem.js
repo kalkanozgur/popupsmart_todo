@@ -1,23 +1,25 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { Button } from "@mui/material";
+import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
 
 import { useState } from "react";
 
-// import { editTodo } from "./../../api";
+import { useTodos } from "./../../context/TodoContext";
 
 function TodoItem({ item }) {
+	const { editTodo } = useTodos();
 	// console.log("item", item);
 	const [isCompleted, setIsCompleted] = useState(item.isCompleted);
+
 	const EditTodo = () => {
-		// editTodo(item.id, "değişti");
+		editTodo(item.id, "değişti", item.isCompleted);
 	};
 	const DeleteTodo = () => {
 		console.log("item.id: ", item);
 	};
 
 	//TODO edit/delete
-
 	return (
 		<div className={styles.TodoCard}>
 			<div
@@ -30,20 +32,9 @@ function TodoItem({ item }) {
 						setIsCompleted(!isCompleted);
 					}}
 				/>
-				<p
-					onDoubleClick={() => {
-						console.log("double clicked to :", item.content);
-					}}
-				>
-					{item.content}
-				</p>
+				<p>{item.content}</p>
 			</div>
 			<div className={styles.TodoButtonGroup}>
-				<div className="EditButton">
-					<Button variant="contained" onClick={EditTodo}>
-						Edit
-					</Button>
-				</div>
 				<span />
 				<div className="DeleteButton">
 					<Button variant="contained" onClick={DeleteTodo}>
