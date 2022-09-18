@@ -3,7 +3,7 @@ import React, { useState, useContext, createContext } from "react";
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-	const [user, setUser] = useState("Özgür");
+	const [user, setUser] = useState();
 	const [loggedIn, setLoggedin] = useState(false);
 
 	const login = (data) => {
