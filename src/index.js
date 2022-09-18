@@ -6,13 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 
 import { ThemeProvider } from "./context/ThemeContext";
 import { UserProvider } from "./context/UserContext";
+import { TodoProvider } from "./context/TodoContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	// <React.StrictMode>
 	<ThemeProvider>
 		<UserProvider>
-			<App />
+			<TodoProvider>
+				<App />
+			</TodoProvider>
 		</UserProvider>
 	</ThemeProvider>
 	// </React.StrictMode>

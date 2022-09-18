@@ -1,35 +1,23 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+
 const url = "https://631e00e7cc652771a48fa6af.mockapi.io/todos";
 
-export const getTodos = () => {
-	const [data, setData] = useState();
-	useEffect(() => {
-		console.log("calling api");
-		axios(url)
-			.then((res) => {
-				const resData = res.data;
-				setData(resData);
-			})
-			.catch((e) => console.log(e))
-			.finally(() => console.log("api fetched"));
-	}, [url]);
+export const fetchTodos = async () => {
+	const { data } = await axios(url).catch((e) => console.log(e));
 	return data;
 };
 
-export const createTodo = async (content) => {
-	// const [data, setData] = useState();
-	if (content.length >= 3) {
-		console.log("createTodo", content);
-		const { data } = await axios
-			.post(url, {
-				content: content,
-			})
-			.catch((e) => console.log(e))
-			.finally(() => {
-				console.log("todoCreated");
-			});
-		console.log("created data: ", data);
-		return data;
-	} else console.log("content min 3 harften oluşmalı");
+export const apiReq = async (method, endpoint, data) => {
+	let resData;
+	await axios({
+		method: method,
+		url: `${url}/${endpoint}`,
+		data: data,
+	})
+		.then((res) => {
+			resData = res.data;
+			console.log(resData);
+		})
+		.catch((e) => console.log(e));
+	return resData;
 };

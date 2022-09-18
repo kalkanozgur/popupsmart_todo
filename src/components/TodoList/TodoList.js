@@ -1,27 +1,27 @@
 import React, { useState } from "react";
-import FilterTodo from "../FilterTodo";
+// import FilterTodo from "../FilterTodo";
 import TodoItem from "../TodoItem";
 import styles from "./styles.module.css";
 
-function TodoList({ todos }) {
-	// console.log(todos);
+function TodoList({ todos, isLoading }) {
 	const [filteredText, setFilteredText] = useState("");
 	const FilterText = (e) => {
 		setFilteredText(e.target.value.toLowerCase());
 	};
-	if (todos)
-		return (
-			<div className={styles.TodoList}>
-				{/* //TODO */}
-				{/* <FilterTodo /> */}
-				<input
-					type="text"
-					name="filter-todos"
-					placeholder="Filter ToDo"
-					value={filteredText}
-					onChange={FilterText}
-				/>
-				<ul>
+	return (
+		<div>
+			{/* //TODO */}
+			{/* <FilterTodo /> */}
+			<input
+				className={styles.FilterTodo}
+				type="text"
+				name="filter-todos"
+				placeholder="Filter ToDo"
+				value={filteredText}
+				onChange={FilterText}
+			/>
+			{!isLoading ? (
+				<ul className={styles.TodoList}>
 					{todos
 						.filter((todo) =>
 							todo.content
@@ -34,9 +34,11 @@ function TodoList({ todos }) {
 							<TodoItem item={item} key={item.id} />
 						))}
 				</ul>
-			</div>
-		);
-	if (!todos) return <div className={styles.Loading}>Loading</div>;
+			) : (
+				<div className={styles.Loading}>Loading</div>
+			)}
+		</div>
+	);
 }
 
 export default TodoList;

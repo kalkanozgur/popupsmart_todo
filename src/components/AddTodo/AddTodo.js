@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import styles from "./AddTodo.module.css";
-import { createTodo } from "./../../api";
+import styles from "./styles.module.css";
+
+import { useTodos } from "./../../context/TodoContext";
 
 function AddTodoForm() {
 	const [formData, setFormData] = useState("");
+	const { addTodo } = useTodos();
 	const OnChange = (e) => {
 		setFormData(e.target.value);
 	};
 	const OnSubmit = (e) => {
 		e.preventDefault();
-		createTodo(formData);
+		addTodo(formData);
+		setFormData("");
 	};
 	return (
 		<div>
