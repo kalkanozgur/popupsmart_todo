@@ -3,12 +3,19 @@ import React, { useState, useContext, createContext } from "react";
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-	const [user, setUser] = useState();
-	const [loggedIn, setLoggedin] = useState(false);
+	const initialUsername = localStorage.getItem("username");
+	const initalLog = localStorage.getItem("loggedIn");
+	const [loggedIn, setLoggedin] = useState(initalLog);
+	const [user, setUser] = useState({
+		username: initialUsername,
+		loggedIn: loggedIn,
+	});
 
 	const login = (data) => {
 		setLoggedin(true);
-		setUser(data);
+		setUser({ username: data, loggedIn: true });
+		localStorage.setItem("username", data);
+		localStorage.setItem("loggedIn", true);
 	};
 
 	const values = {

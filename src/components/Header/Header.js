@@ -11,8 +11,8 @@ function Header() {
 		<div className={styles.Header}>
 			<div>TODO App</div>
 			<div>
-				User:
-				{JSON.stringify(user)}
+				Hi! {user.username}
+				Get ToDo
 			</div>
 			<div>{JSON.stringify(theme)}</div>
 		</div>
