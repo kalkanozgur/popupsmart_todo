@@ -1,11 +1,11 @@
 .TodoCard{
-    background-color: rgb(60, 33, 0);
+    background-color: rgb(15, 124, 183);
     margin: 1vh;
     padding: 1vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 0.5vh solid;
+    border: 0.5vh;
     border-radius: 100vh;
 
 }
@@ -14,11 +14,17 @@
     flex: auto;
     
 }
-.Done p{
-    color: rgb(70, 70, 70);
+.Done .Text{
+    color: rgb(91, 197, 255);
     text-decoration: line-through;
 }
-.TodoContent p{
+.TodoContent .Text{
+    color: rgb(91, 197, 255);
+    padding-left: 2vh;
+    font-size: 3vh;
+}
+.TodoContent .TextField{
+    color:rgb(91, 197, 255);
     padding-left: 2vh;
     font-size: 3vh;
 }

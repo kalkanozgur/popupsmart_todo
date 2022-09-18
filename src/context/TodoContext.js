@@ -8,8 +8,6 @@ const TodoProvider = ({ children }) => {
 	const [todos, setTodos] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	console.log("Todos initialized");
-
 	useEffect(() => {
 		refreshTodos();
 	}, []);
@@ -38,11 +36,44 @@ const TodoProvider = ({ children }) => {
 		}
 	};
 
-	const editTodo = async (id, content, isComplated) => {
-		console.log(id, content, isComplated);
+	const editTodo = async (id, content, isCompleted = false) => {
+		console.log("id", id);
+		console.log("content", content);
+		console.log("isComplated", isCompleted);
+		try {
+			setIsLoading(true);
+			apiReq("put", `${id}`, {
+				content: content,
+				isCompleted: isCompleted,
+			}).then(() => {
+				refreshTodos();
+			});
+		} catch (e) {
+			setIsLoading(true);
+			console.log(e);
+		}
 	};
 
-	const values = { todos, isLoading, refreshTodos, addTodo, editTodo };
+	const deleteTodo = async (id) => {
+		try {
+			setIsLoading(true);
+			apiReq("delete", `${id}`, "").then(() => {
+				refreshTodos();
+			});
+		} catch (e) {
+			setIsLoading(true);
+			console.log(e);
+		}
+	};
+
+	const values = {
+		todos,
+		isLoading,
+		refreshTodos,
+		addTodo,
+		editTodo,
+		deleteTodo,
+	};
 	return <TodoContext.Provider value={values}>{children}</TodoContext.Provider>;
 };
 

@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { Button } from "@mui/material";
-import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
-
-import { useState } from "react";
+import { Button, rgbToHex, TextField } from "@mui/material";
 
 import { useTodos } from "./../../context/TodoContext";
 
 function TodoItem({ item }) {
-	const { editTodo } = useTodos();
-	// console.log("item", item);
-	const [isCompleted, setIsCompleted] = useState(item.isCompleted);
+	const { editTodo, deleteTodo } = useTodos();
 
-	const EditTodo = () => {
-		editTodo(item.id, "değişti", item.isCompleted);
+	const [isCompleted, setIsCompleted] = useState(item.isCompleted);
+	const [editingText, setEditingText] = useState(item.content);
+
+	const [isTextFocused, setIsTextFocused] = useState(false);
+
+	const EditTodo = (content, isComplated) => {
+		editTodo(item.id, content, isComplated);
 	};
 	const DeleteTodo = () => {
-		console.log("item.id: ", item);
+		deleteTodo(item.id);
 	};
 
 	//TODO edit/delete
@@ -29,15 +29,44 @@ function TodoItem({ item }) {
 					type="checkbox"
 					checked={isCompleted}
 					onChange={() => {
-						setIsCompleted(!isCompleted);
+						EditTodo(item.content, !isCompleted);
+						// EditTodo(item.id, item.content, isCompleted);
 					}}
 				/>
-				<p>{item.content}</p>
+				{!isTextFocused ? (
+					<p
+						className={styles.Text}
+						onClick={() => {
+							setIsTextFocused(true);
+						}}
+					>
+						{editingText}
+					</p>
+				) : (
+					<TextField
+						value={editingText}
+						onChange={(e) => setEditingText(e.target.value)}
+						onMouseOut={(e) => {
+							// EditTodo(editingText);
+							setIsTextFocused(false);
+						}}
+						onKeyPress={(e) => {
+							if (e.key === "Enter") {
+								EditTodo(editingText, item.isCompleted);
+								e.preventDefault();
+							}
+						}}
+					/>
+				)}
 			</div>
 			<div className={styles.TodoButtonGroup}>
 				<span />
 				<div className="DeleteButton">
-					<Button variant="contained" onClick={DeleteTodo}>
+					<Button
+						variant="contained"
+						onClick={DeleteTodo}
+						sx={{ bgcolor: "#757575" }}
+					>
 						Delete
 					</Button>
 				</div>
